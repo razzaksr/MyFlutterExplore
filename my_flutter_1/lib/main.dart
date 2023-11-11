@@ -6,8 +6,8 @@ void main(){
     // home:Buttonss()
     // home:ContainerDemo()
     // home:RowDemo()
-    home:ColumnDemo()
-    // home:ExpandedAkaFlex()
+    // home:ColumnDemo()
+    home:ExpandedAkaFlex()
   ));
 }
 
