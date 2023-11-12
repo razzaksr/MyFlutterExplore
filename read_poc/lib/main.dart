@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'SkillSet.dart';
 import 'Expert.dart';
+import 'ExpertCard.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -16,9 +17,41 @@ void main() {
     // home:IllustrationListWithCustomClass()
 
     // Listing expert objects as list
-    home: CardDemoWithListOfCustomObjects(),
+    // home: CardDemoWithListOfCustomObjects(),
+
+    // Listing expert objects as List but custom widget
+    home:CardAsStandaloneWidgetDemoWithCustomObjects()
   ));
 }
+
+class CardAsStandaloneWidgetDemoWithCustomObjects extends StatefulWidget {
+  const CardAsStandaloneWidgetDemoWithCustomObjects({super.key});
+
+  @override
+  State<CardAsStandaloneWidgetDemoWithCustomObjects> createState() => _CardAsStandaloneWidgetDemoWithCustomObjectsState();
+}
+
+class _CardAsStandaloneWidgetDemoWithCustomObjectsState extends State<CardAsStandaloneWidgetDemoWithCustomObjects> {
+  List<dynamic> myExperts=[
+    Expert("Razak Mohamed S", "L&D Manager", ['java','python','flutter'], 10),
+    Expert("Rasheedha R", "Operations Head", ['Scrum Master','digital marketing'], 10),
+    Expert("Annamalai S", "Lead Trainer", ['java','python','java script'], 5),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('View Experts of Zealous'),
+        centerTitle: true,
+        backgroundColor: Colors.lightBlue,
+      ),
+      body: Column(
+        children: myExperts.map((e) => ExpertCard(e)).toList(),
+      ),
+    );
+  }
+}
+
 
 class CardDemoWithListOfCustomObjects extends StatefulWidget {
   const CardDemoWithListOfCustomObjects({super.key});
