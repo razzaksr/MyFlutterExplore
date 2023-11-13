@@ -3,6 +3,8 @@ import 'package:read_poc/ExpertCardWithFun.dart';
 import 'SkillSet.dart';
 import 'Expert.dart';
 import 'ExpertCard.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
+import 'package:toast/toast.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -24,9 +26,59 @@ void main() {
     // home:CardAsStandaloneWidgetDemoWithCustomObjects()
 
     // Card with delete functionality(functions) as argument
-    home: CardWithFunctions(),
+    // home: CardWithFunctions(),
+
+    // Card as ListTile in ListView
+    home: CardNListView(),
   ));
 }
+
+class CardNListView extends StatefulWidget {
+  const CardNListView({super.key});
+
+  @override
+  State<CardNListView> createState() => _CardNListViewState();
+}
+
+class _CardNListViewState extends State<CardNListView> {
+  List<dynamic> myExperts=[
+    Expert("Razak Mohamed S", "L&D Manager", ['java','python','flutter'], 10),
+    Expert("Rasheedha R", "Operations Head", ['Scrum Master','digital marketing'], 10),
+    Expert("Annamalai S", "Lead Trainer", ['java','python','java script'], 5),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    // ToastContext.init(context);
+    ToastContext().init(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('View Experts of Zealous in ListView'),
+        centerTitle: true,
+        backgroundColor: Colors.lightBlue,
+      ),
+      body:ListView.builder(
+          itemCount: myExperts.length,
+          itemBuilder:(context,index){
+            return Card(
+              child: ListTile(
+                onTap: (){
+                  // Fluttertoast.showToast(msg: "hai");
+                  Toast.show("Experience "+myExperts[index].experience.toString()+" skills are "+myExperts[index].expertSkills.toString(),duration: Toast.lengthLong);
+                },
+                title: Text(myExperts[index].expertName),
+                leading: CircleAvatar(
+                  child: Text(myExperts[index].expertName[0]),
+                  backgroundColor: Colors.lightBlue,
+                  foregroundColor: Colors.white,
+                ),
+              ),
+            );
+          }
+      )
+    );
+  }
+}
+
 
 class CardWithFunctions extends StatefulWidget {
   const CardWithFunctions({super.key});
