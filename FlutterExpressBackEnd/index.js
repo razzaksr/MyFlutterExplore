@@ -25,6 +25,53 @@ app.listen(2000,()=>{
 
 // routings
 
+app.delete("/:num",async(req,res)=>{
+    const accNum=req.params.num
+    const sql="delete from customers where acc_number=?"
+    base.query(sql,[accNum],(err,ack)=>{
+        if(err){
+            res.status(500).json({error:err.message})
+            return
+        }
+        if(ack.affectedRows==0){
+            res.status(404).json({error:"No records are deleted"})
+            return
+        }
+        res.status(200).json({message:"Record has deleted"})
+    })
+})
+
+app.put("/",async(req,res)=>{
+    const{accNumber,accHolder,accBal}=req.body
+    const sql="update customers set acc_holder=?,acc_bal=? where acc_number=?"
+    base.query(sql,[accHolder,accBal,accNumber],(err,results)=>{
+        if(err){
+            res.status(500).json({error:err.message})
+            return
+        }
+        if(results.affectedRows==0){
+            res.status(404).json({error:"No matched record to be updated"})
+            return
+        }
+        res.status(200).json({"message":"Records are updated"})
+    })
+})
+
+app.get("/:num",async(req,res)=>{
+    const sql="select * from customers where acc_number=?"
+    base.query(sql,[req.params.num],(err,records)=>{
+        if(err){
+            res.status(500).json({error:err.message})
+            return
+        }
+        if(records.length==0){
+            res.status(404).json({error:"No records ae matched"})
+            return
+        }
+        res.status(200).json({message:records[0]})
+    })
+})
+
 app.post("/",async(req,res)=>{
     const{accNumber,accHolder,accBal}=req.body
     const sql="insert into customers values(?,?,?)"

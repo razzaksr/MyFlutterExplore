@@ -52,8 +52,9 @@ class _CreationState extends State<Creation> {
                     onPressed: (){
                       Customers customers=Customers.named(int.parse(accNumberController.text),
                           accHolderController.text, double.parse(accBalanceController.text));
-                      var msg=API.createNew(customers);
+                      var msg=API.createNew(customers).toString();
                       Toast.show("$msg",duration:Toast.lengthLong);
+                      Navigator.pop(context);
                     },
                     icon: Icon(Icons.add),
                     label: Text("Create new Account"),

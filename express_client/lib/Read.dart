@@ -1,7 +1,9 @@
+import 'package:express_client/Create.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'package:express_client/Api.dart';
 import 'package:express_client/Customers.dart';
+import 'Update.dart';
 
 class Read extends StatelessWidget {
   const Read({super.key});
@@ -45,9 +47,12 @@ class Read extends StatelessWidget {
                         itemBuilder: (context) => [
                           PopupMenuItem(child: Text('Edit'),onTap: (){
                             Toast.show("Edit Clicked");
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Updation(myAll[index].accNumber)));
                           },),
                           PopupMenuItem(child: Text('Delete'),onTap: (){
                             Toast.show("Delete Clicked");
+                            API.deleteOne(myAll[index].accNumber);
+                            //Navigator.pop(context,true);
                           },),
                         ],
                       ),
@@ -57,7 +62,13 @@ class Read extends StatelessWidget {
               );
             }
           },
-        )
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Creation()));
+          },
+          child: Icon(Icons.add),
+        ),
     );
   }
 }

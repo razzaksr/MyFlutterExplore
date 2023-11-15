@@ -9,3 +9,19 @@ Content-Type: application/json
     "accHolder":"Rajiya",
     "accBal":12333.4
 }
+
+###
+GET http://localhost:2000/87678987
+
+###
+PUT http://localhost:2000/
+Content-Type: application/json
+
+{
+    "accNumber":44444,
+    "accHolder":"Sabari S",
+    "accBal":1222.4
+}
+
+###
+DELETE http://localhost:2000/22222
