@@ -4,6 +4,27 @@ import 'package:express_client/Customers.dart';
 import 'package:http/http.dart' as http;
 class API{
   static String base = "http://localhost:2000/";
+
+  static Future<String> createNew(Customers customers)async{
+    print(customers);
+    Map<String,dynamic> dta={
+      'accNumber':customers.accNumber,
+      'accHolder':customers.accHolder,
+      'accBal':customers.accBalance
+    };
+    print(dta);
+    var url=Uri.parse("$base");
+    Map<String, String> args={"Content-Type":"application/json"};
+    var response=await http.post(url,headers: args,body: jsonEncode(dta));
+    if (response.statusCode == 200) {
+      print('User created successfully');
+      var bdy = jsonDecode(response.body);
+      return bdy['message'];
+    } else {
+      throw Exception('Failed to create user');
+    }
+  }
+
   static readAll()async{
     List<Customers> all=[];
     try{
