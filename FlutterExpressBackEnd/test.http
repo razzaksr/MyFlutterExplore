@@ -5,9 +5,9 @@ POST http://localhost:2000/
 Content-Type: application/json
 
 {
-    "accNumber":1234323,
-    "accHolder":"Rajiya",
-    "accBal":12333.4
+    "accNumber":19191919,
+    "accHolder":"Shahul Hameed",
+    "accBal":9333.4
 }
 
 ###

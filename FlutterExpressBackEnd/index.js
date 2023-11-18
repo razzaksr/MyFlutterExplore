@@ -11,8 +11,8 @@ app.use(bodyParser.json())
 const base = mysql.createConnection({
     host:'localhost',
     user:'root',
-    password:'Razak@123',
-    database:'muthayammal'
+    password:'password@123',
+    database:'mec'
 })
 
 base.connect(()=>{
